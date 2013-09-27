@@ -15,31 +15,24 @@ class Integer
 	@@square_memo = {}
 
 	def is_sum_of_cons_squares
-		sq = (Math.sqrt(self)).to_i
-		if @@square_memo.has_key?(self)
-			puts "#{self} => via Memo"
-			return true
-		end
+		sq = (Math.sqrt(self)).to_i 
 		(1..sq).each do |x| 
 			(x..sq).each do |y| 
 				arr = (x..y).to_a
 				square = arr.square
-				if square == self && arr.length > 1
-					puts "#{self} => #{arr}"
-					return true 
-				elsif arr.length > 1 && square.is_palin?
-					@@square_memo[square] = true
-				end
+				break if square > self
+				@@square_memo[square] = true if arr.length > 1 && square.is_palin?				
 			end
 		end
-		#puts @@square_memo
 		return false
-	end		
+	end	
+
+	def get_palins
+		@@square_memo.select {|x| x.is_palin? && x < self}.map { |k, value| k }.sort.uniq
+	end
 end
 
 class Array	
-	@@memo = {}
-
 	def square
 		self.inject(0) { |mem, var| mem + ( var * var)}			
 	end
@@ -47,13 +40,7 @@ end
 
 class Euler_125
 	def find_cons_square_palins_under(limit)
-		result = []
-		(1..limit).each do |x| 
-			next unless x.is_palin?
-			if x.is_sum_of_cons_squares
-				result << x
-			end
-		end
-		return result
+		limit.is_sum_of_cons_squares
+		limit.get_palins		
 	end
 end

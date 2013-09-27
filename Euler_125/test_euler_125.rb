@@ -21,13 +21,13 @@ class Test_Integer < Test::Unit::TestCase
 		TEST_CONS_SEQUENCES.each{|input, output| assert_equal(output, input.cons_sequences)}		
 	end
 
-	TEST_CONS = { 1000 => false,
-								595 => true,
-						    594 => false}
+	# TEST_CONS = { 1000 => false,
+	# 							595 => true,
+	# 					    594 => false}
 
-	def test_is_sum_of_cons_squares
-		TEST_CONS.each{|input, output| assert_equal(output, input.is_sum_of_cons_squares)}		
-	end
+	# def test_is_sum_of_cons_squares
+	# 	TEST_CONS.each{|input, output| assert_equal(output, input.is_sum_of_cons_squares)}		
+	# end
 end
 
 class Test_Array < Test::Unit::TestCase
@@ -45,14 +45,13 @@ class Test_Euler_125 < Test::Unit::TestCase
 	end
 
 	def test_find_cons_square_palins_under
-		#assert_equal([5, 55, 77, 181, 313, 434, 505, 545, 595, 636, 818 ],@euler_125.find_cons_square_palins_under(1000))
+		assert_equal([5, 55, 77, 181, 313, 434, 505, 545, 595, 636, 818 ],@euler_125.find_cons_square_palins_under(1000))
 	end
 
 	def test_sum
-		assert_equal(false, 100000.is_sum_of_cons_squares)
 		assert_equal(4164, @euler_125.find_cons_square_palins_under(1000).inject(:+))
 		assert_equal(20268, @euler_125.find_cons_square_palins_under(10000).inject(:+))
 		assert_equal(272059, @euler_125.find_cons_square_palins_under(50000).inject(:+))
-		#assert_equal(272059, @euler_125.find_cons_square_palins_under(10**8).inject(:+))
+		assert_equal(2906969179, @euler_125.find_cons_square_palins_under(10**8).inject(:+))
 	end
 end
